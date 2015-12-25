@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<databaseChangeLog
+  xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+
+    <changeSet id="1" author="aro">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                select count(*) from lt_role where authority = 'ROLE_ADMIN'
+            </sqlCheck>
+        </preConditions>
+        <sql>
+            insert into lt_role(authority) values('ROLE_ADMIN');
+        </sql>
+    </changeSet>
+
+    <changeSet id="2" author="aro">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                select count(*) from lt_role where authority = 'ROLE_USER'
+            </sqlCheck>
+        </preConditions>
+        <sql>
+            insert into lt_role(authority) values('ROLE_USER');
+        </sql>
+    </changeSet>
+
+    <changeSet id="3" author="aro">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                select count(*) from lt_user where email = 'admin@admin.com'
+            </sqlCheck>
+        </preConditions>
+        <sql>
+            insert into lt_user(name,email,password) values('admin','admin@admin.com','$2a$10$lqH6OrJNScUM4FTe5pAkEO9yGcxaw9.O1XBu/BuMdj5ZD/7Y.k37S');
+        </sql>
+    </changeSet>
+
+    <changeSet id="4" author="aro">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                select count(*) from lt_user where email = 'alex@user.com'
+            </sqlCheck>
+        </preConditions>
+        <sql>
+            insert into lt_user(name,email,password) values('alex','alex@user.com','$2a$10$lqH6OrJNScUM4FTe5pAkEO9yGcxaw9.O1XBu/BuMdj5ZD/7Y.k37S');
+        </sql>
+    </changeSet>
+    <changeSet id="5" author="aro">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                select count(*) from lt_user where email = 'vova@user.com'
+            </sqlCheck>
+        </preConditions>
+        <sql>
+            insert into lt_user(name,email,password) values('vova','vova@user.com','$2a$10$lqH6OrJNScUM4FTe5pAkEO9yGcxaw9.O1XBu/BuMdj5ZD/7Y.k37S');
+        </sql>
+    </changeSet>
+    <changeSet id="6" author="aro">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                select count(*) from lt_user where email = 'dima@user.com'
+            </sqlCheck>
+        </preConditions>
+        <sql>
+            insert into lt_user(name,email,password) values('dima','dima@user.com','$2a$10$lqH6OrJNScUM4FTe5pAkEO9yGcxaw9.O1XBu/BuMdj5ZD/7Y.k37S');
+        </sql>
+    </changeSet>
+
+    <changeSet id="7" author="aro">
+        <sql>
+            insert into lt_role_user(user_id,role_id) values(
+            (select id from lt_user where email='admin@admin.com'),
+            (select id from lt_role where authority='ROLE_ADMIN')
+            );
+        </sql>
+    </changeSet>
+    <changeSet id="8" author="aro">
+        <sql>
+            insert into lt_role_user(user_id,role_id) values(
+            (select id from lt_user where email='admin@admin.com'),
+            (select id from lt_role where authority='ROLE_USER')
+            );
+        </sql>
+    </changeSet>
+
+    <changeSet id="9" author="aro">
+        <sql>
+            insert into lt_role_user(user_id,role_id) values(
+            (select id from lt_user where email='alex@user.com'),
+            (select id from lt_role where authority='ROLE_USER')
+            );
+        </sql>
+    </changeSet>
+    <changeSet id="10" author="aro">
+        <sql>
+            insert into lt_role_user(user_id,role_id) values(
+            (select id from lt_user where email='vova@user.com'),
+            (select id from lt_role where authority='ROLE_USER')
+            );
+        </sql>
+    </changeSet>
+    <changeSet id="11" author="aro">
+        <sql>
+            insert into lt_role_user(user_id,role_id) values(
+            (select id from lt_user where email='dima@user.com'),
+            (select id from lt_role where authority='ROLE_USER')
+            );
+        </sql>
+    </changeSet>
+
+
+</databaseChangeLog>
