@@ -44,6 +44,7 @@
     На вход подается id ресторана.
 
 API такое:
+
 1.Log in.
 урл -   /j_spring_security_check
 метод - POST
