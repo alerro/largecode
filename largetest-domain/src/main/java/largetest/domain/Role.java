@@ -9,7 +9,7 @@ import javax.persistence.Table;
 public class Role extends Root {
     private String authority;
 
-    @Column(unique = true, nullable = true)
+    @Column(unique = true, nullable = false)
     public String getAuthority() {
         return authority;
     }
