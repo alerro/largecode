@@ -20,16 +20,15 @@ public class VoteDAOImpl extends RootDAOImpl<Vote>  implements IVoteDAO {
     }
 
     @Override
-    public Vote findVote(Long restaurantId, Date date, Long userId) {
-        Query query = getSession().createQuery("from Vote where restaurant.id = :restaurantId and user.id =:userId and DATE(date) =:date");
-        query.setLong("restaurantId", restaurantId);
+    public Vote findVote(Date date, Long userId) {
+        Query query = getSession().createQuery("from Vote where user.id =:userId and DATE(date) =:date");
         query.setLong("userId", userId);
         query.setDate("date", date);
         List<Vote> list = query.list();
         if(CollectionUtils.isEmpty(list)){
             return null;
         }else{
-            logger.debug("More than 1 votes found. Must be only one. restaurantId={},userId={},date="+date,restaurantId,userId);
+            logger.debug("More than 1 votes found. Must be only one. userId={},date={}", userId,date);
             return list.get(0);
         }
     }

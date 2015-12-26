@@ -5,5 +5,5 @@ import largetest.domain.Vote;
 import java.util.Date;
 
 public interface IVoteDAO extends IRootDAO<Vote> {
-    Vote findVote(Long restaurantId, Date date, Long userId);
+    Vote findVote(Date date, Long userId);
 }

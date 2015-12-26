@@ -32,8 +32,8 @@ public class RestaurantServiceImpl implements IRestaurantService {
     private static final String STATUS_RESTAURANT_NOT_SPECIFIED = "RESTAURANT_NOT_SPECIFIED";
     private static final String STATUS_DISHES_LIST_IS_EMPTY = "DISHES_EMPTY";
     private static final String STATUS_INCORRECT_DATE = "INCORRECT_DATE";
-
     private static final String STATUS_USER_NOT_SPECIFIED = "RESTAURANT_NOT_SPECIFIED";
+    private static final String STATUS_VOTE_TOO_LATE = "VOTE_TOO_LATE";
 
 
     @Autowired
@@ -246,7 +246,7 @@ public class RestaurantServiceImpl implements IRestaurantService {
 
         Date currentDate = new Date();
         Date truncatedDate = DateUtils.truncate(currentDate, Calendar.DATE);
-        Vote vote = voteDAO.findVote(restaurantId,truncatedDate,user.getId());
+        Vote vote = voteDAO.findVote(truncatedDate,user.getId());
         if(vote == null){
             vote = new Vote();
             vote.setDate(currentDate);
@@ -258,6 +258,9 @@ public class RestaurantServiceImpl implements IRestaurantService {
                 vote.setRestaurant(restaurant);
                 vote.setDate(currentDate);
                 voteDAO.merge(vote);
+            }else {
+                response.setStatus(STATUS_VOTE_TOO_LATE);
+                response.setErrorMessage("Your vote is too late, you can vote again the same day only before 11.00 AM.");
             }
 
         }

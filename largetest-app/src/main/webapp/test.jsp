@@ -110,6 +110,6 @@
 <br/>
 
 <div>
-    <input type="text"  style="width: 600px;"/>
+    <input type="text"  style="width: 600px;"  value="3"/>
     <a class="vote"  href="javascript:void(0)">Проголосовать за ресторан</a>
 </div>
