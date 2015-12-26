@@ -84,7 +84,6 @@ public class RestaurantDAOImpl extends RootDAOImpl<Restaurant>  implements IRest
             return result;
         } catch (SQLException e) {
             logger.error("Failed to execute a query", e);
-            e.printStackTrace();
         } finally {
             closeAfterRaw(connection, preparedStatement, rs);
         }

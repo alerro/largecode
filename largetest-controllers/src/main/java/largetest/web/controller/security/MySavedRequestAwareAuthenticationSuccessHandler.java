@@ -39,8 +39,4 @@ public class MySavedRequestAwareAuthenticationSuccessHandler extends SimpleUrlAu
 
         clearAuthenticationAttributes(request);
     }
-
-    public void setRequestCache(RequestCache requestCache) {
-        this.requestCache = requestCache;
-    }
 }

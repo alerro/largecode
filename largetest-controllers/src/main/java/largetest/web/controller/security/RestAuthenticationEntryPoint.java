@@ -13,7 +13,7 @@ import java.io.IOException;
  * Date: 24.12.15
  * Time: 2:23
  */
-@Component("restAuthenticationEntryPoint")
+@Component
 public class RestAuthenticationEntryPoint implements AuthenticationEntryPoint {
     @Override
     public void commence( HttpServletRequest request, HttpServletResponse response,AuthenticationException authException )
