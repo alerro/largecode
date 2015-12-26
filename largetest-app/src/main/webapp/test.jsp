@@ -10,7 +10,7 @@
             else alert('Код ошибки: ' + data.status + ', Описание: ' + data.errorMessage);
         };
         processData = function(data){
-            alert(data);
+            alert(JSON.stringify(data));
         };
         $('a.jsonrequest').click(function(event) {
             thediv = $(this).closest("div");
