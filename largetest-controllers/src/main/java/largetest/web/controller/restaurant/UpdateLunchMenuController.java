@@ -36,7 +36,7 @@ public class UpdateLunchMenuController {
      */
     @RequestMapping(value = "/api/admin/restaurant/lunchmenu/update", method = RequestMethod.POST)
     @ResponseBody
-    public JsonResponse add(@RequestBody LunchMenuDTO dto) {
+    public JsonResponse handle(@RequestBody LunchMenuDTO dto) {
         logger.debug("Updating lunchmenu  for restaurant with id = {}", dto.getRestaurantId());
         return restaurantService.updateLunchMenu(dto);
     }

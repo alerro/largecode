@@ -56,7 +56,7 @@
         $('a.vote').click(function(event) {
             thediv = $(this).closest("div");
             $.ajax({
-                type: "GET",
+                type: "POST",
                 url: "/api/votetohavelunch/"+thediv.children( "input" ).val(),
                 success: processJsonResponse
             });

@@ -10,6 +10,7 @@ import org.springframework.security.web.bind.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
@@ -31,9 +32,9 @@ public class VoteController {
      * @param restaurantId - id of restaurant
      * @return  JsonResponse
      */
-    @RequestMapping(value = "/api/votetohavelunch/{restaurantId}")
+    @RequestMapping(value = "/api/votetohavelunch/{restaurantId}", method = RequestMethod.POST)
     @ResponseBody
-    public JsonResponse add(@PathVariable Long restaurantId,@AuthenticationPrincipal SpringUser springUser) {
+    public JsonResponse handle(@PathVariable Long restaurantId,@AuthenticationPrincipal SpringUser springUser) {
         logger.debug("I want to have lunch at restaurant {}", restaurantId);
 
         return restaurantService.vote(springUser,restaurantId);

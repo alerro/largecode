@@ -36,7 +36,7 @@ public class AddDishesToRestaurantController {
      */
     @RequestMapping(value = "/api/admin/restaurant/dish/add", method = RequestMethod.POST)
     @ResponseBody
-    public JsonResponse add(@RequestBody DishesDTO dto) {
+    public JsonResponse handle(@RequestBody DishesDTO dto) {
         logger.debug("Adding new dishes to restaurant with id = {}", dto.getRestaurantId());
         return restaurantService.addDishes(dto);
     }
