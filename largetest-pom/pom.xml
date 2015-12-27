@@ -26,6 +26,23 @@
             <artifactId>logback-core</artifactId>
             <version>${logback.version}</version>
         </dependency>
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
+            <version>${jackson.annotations.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${jackson.databind.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+            <version>${jackson.core.version}</version>
+        </dependency>
+
     </dependencies>
 
 
@@ -33,7 +50,7 @@
         <module>../largetest-domain</module>
         <module>../largetest-repository</module>
         <module>../largetest-service</module>
-        <module>../largetest-app</module>
+        <module>../largetest-testapp</module>
         <module>../largetest-controllers</module>
         <module>../largetest-database</module>
     </modules>
@@ -55,7 +72,13 @@
         <hibernate.version>3.3.2.GA</hibernate.version>
         <hibernate.jpa.version>1.0.0.Final</hibernate.jpa.version>
 
+        <jackson.annotations.version>2.4.3</jackson.annotations.version>
+        <jackson.core.version>2.4.3</jackson.core.version>
+        <jackson.databind.version>2.4.3</jackson.databind.version>
+
         <jackson.jaxrs.version>1.4.3</jackson.jaxrs.version>
+
+        <jackson.version>1.9.13</jackson.version>
 
         <jackson.version>1.9.13</jackson.version>
 

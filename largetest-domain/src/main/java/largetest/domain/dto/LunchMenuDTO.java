@@ -8,16 +8,16 @@ import java.util.List;
  * Time: 3:05
  */
 public class LunchMenuDTO {
-    private String dateString;
+    private String date;
     private Long restaurantId;
     private List<MenuItemDTO> menuItems;
 
-    public String getDateString() {
-        return dateString;
+    public String getDate() {
+        return date;
     }
 
-    public void setDateString(String dateString) {
-        this.dateString = dateString;
+    public void setDate(String date) {
+        this.date = date;
     }
 
     public Long getRestaurantId() {

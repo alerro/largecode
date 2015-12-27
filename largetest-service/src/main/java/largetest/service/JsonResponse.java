@@ -9,6 +9,8 @@ public class JsonResponse {
     private String status = "Ok";
     private String errorMessage = "";
 
+    private Object data;
+
     public JsonResponse() {
     }
 
@@ -31,5 +33,13 @@ public class JsonResponse {
 
     public void setErrorMessage(String errorMessage) {
         this.errorMessage = errorMessage;
+    }
+
+    public Object getData() {
+        return data;
+    }
+
+    public void setData(Object data) {
+        this.data = data;
     }
 }

@@ -33,5 +33,13 @@ public class VoteDAOImpl extends RootDAOImpl<Vote>  implements IVoteDAO {
         }
     }
 
+    @Override
+    public Long findVotesNumber(Date date, Long restaurantId) {
+        Query query = getSession().createQuery("select count(*) from Vote where restaurant.id =:restaurantId and DATE(date) =:date");
+        query.setLong("restaurantId", restaurantId);
+        query.setDate("date", date);
+        return (Long)query.uniqueResult();
+    }
+
 }
 

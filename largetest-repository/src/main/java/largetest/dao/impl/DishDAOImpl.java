@@ -13,9 +13,11 @@ public class DishDAOImpl extends RootDAOImpl<Dish>  implements IDishDAO {
     }
 
     @Override
-    public boolean isDishUnique(DishDTO dto) {
-        Query query = getSession().createQuery("select count (*) from Dish where name = :name ");
+    public boolean isDishUnique(DishDTO dto,Long restaurantId) {
+        Query query = getSession().createQuery("select count (*) from Dish where name = :name and restaurant.id = :restaurantId");
         query.setString("name", dto.getName());
+        query.setLong("restaurantId", restaurantId);
+
         return ((Long) query.uniqueResult()) == 0;
     }
 

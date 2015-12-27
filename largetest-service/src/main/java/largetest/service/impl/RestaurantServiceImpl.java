@@ -77,6 +77,10 @@ public class RestaurantServiceImpl implements IRestaurantService {
         restaurant.setAddress(dto.getAddress());
         restaurantDAO.save(restaurant);
 
+        //put newly created restaurant into response
+        dto.setId(restaurant.getId());
+        response.setData(dto);
+
         return response;
     }
 
@@ -89,7 +93,7 @@ public class RestaurantServiceImpl implements IRestaurantService {
         //нахожу ресторан
         Restaurant restaurant = null;
         if(dto.getRestaurantId() != null){
-            restaurant = restaurantDAO.load(dto.getRestaurantId());
+            restaurant = restaurantDAO.get(dto.getRestaurantId());
         }
         if(restaurant == null){
             logger.debug("Restaurant is specified incorrectly.");
@@ -112,15 +116,29 @@ public class RestaurantServiceImpl implements IRestaurantService {
         }
         restaurantDAO.persist(restaurant);
 
+        response.setData(assembleDishesDTO(restaurant));
+
         return response;
 
+    }
+
+    private DishesDTO assembleDishesDTO(Restaurant restaurant){
+        DishesDTO dishesDTO = new DishesDTO();
+        dishesDTO.setRestaurantId(restaurant.getId());
+        dishesDTO.setDishes(new ArrayList<DishDTO>());
+        for(Dish dish : restaurant.getDishes()){
+            DishDTO dishDTO = new DishDTO();
+            dishDTO.setName(dish.getName());
+            dishesDTO.getDishes().add(dishDTO);
+        }
+        return dishesDTO;
     }
 
     private void addNewDish(Restaurant restaurant, DishDTO dishDTO){
         if(StringUtils.isEmpty(dishDTO.getName())){
             return;
         }
-        if(dishDAO.isDishUnique(dishDTO)){
+        if(dishDAO.isDishUnique(dishDTO,restaurant.getId())){
             Dish dish = new Dish();
             dish.setName(dishDTO.getName());
             dish.setRestaurant(restaurant);
@@ -139,7 +157,7 @@ public class RestaurantServiceImpl implements IRestaurantService {
         //нахожу ресторан
         Restaurant restaurant = null;
         if(dto.getRestaurantId() != null){
-            restaurant = restaurantDAO.load(dto.getRestaurantId());
+            restaurant = restaurantDAO.get(dto.getRestaurantId());
         }
         if(restaurant == null){
             logger.debug("Restaurant is specified incorrectly.");
@@ -150,11 +168,11 @@ public class RestaurantServiceImpl implements IRestaurantService {
 
         //проверяю дату
         Date date = null;
-        if(dto.getDateString() != null){
+        if(dto.getDate() != null){
             try {
-                date = ddMMyyyy_dot.parse(dto.getDateString());
+                date = ddMMyyyy_dot.parse(dto.getDate());
             } catch (ParseException e) {
-                logger.debug("Date specified incorrectly {}", dto.getDateString());
+                logger.debug("Date specified incorrectly {}", dto.getDate());
             }
         }
         if(date==null){
@@ -190,8 +208,28 @@ public class RestaurantServiceImpl implements IRestaurantService {
         }
         lunchMenuDAO.persist(lunchMenu);
 
-         return response;
+        //заполняю полные данные о меню на этот день для ответа
+        response.setData(assembleLunchMenu(lunchMenu,dto));
 
+
+        return response;
+
+    }
+
+    private LunchMenuDTO assembleLunchMenu(LunchMenu lunchMenu, LunchMenuDTO dto){
+        //беру объект LunchMenuDTO пришедший как параметр от контроллера и поскольку далее он мне
+        //не нужен, использую его для возврата полных данных о меню ресторана на этот день
+        dto.setMenuItems(new ArrayList<MenuItemDTO>());
+        if(lunchMenu.getMenuItems()!=null){
+            for(MenuItem menuItem: lunchMenu.getMenuItems()){
+                MenuItemDTO itemDTO = new MenuItemDTO();
+                itemDTO.setDishId(menuItem.getDish().getId());
+                itemDTO.setDishName(menuItem.getDish().getName());
+                itemDTO.setPrice(menuItem.getPrice());
+                dto.getMenuItems().add(itemDTO);
+            }
+        }
+        return dto;
     }
 
     private void updateMenuItem(LunchMenu lunchMenu, MenuItemDTO menuItemDTO){
@@ -264,6 +302,14 @@ public class RestaurantServiceImpl implements IRestaurantService {
             }
 
         }
+
+        //вычисляю, сколько голосов отдано за данный ресторан за сегодня и кладу в ответ
+        VoteDTO voteDTO = new VoteDTO();
+        voteDTO.setRestaurantId(restaurantId);
+        voteDTO.setDate(ddMMyyyy_dot.format(truncatedDate));
+        voteDTO.setVotesNumber(voteDAO.findVotesNumber(truncatedDate,restaurantId));
+        response.setData(voteDTO);
+
         return response;
     }
 }

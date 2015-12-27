@@ -1,0 +1,42 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>largetest</groupId>
+        <artifactId>main-pom</artifactId>
+        <version>1.0</version>
+        <relativePath>../largetest-pom</relativePath>
+    </parent>
+
+    <groupId>largetest</groupId>
+    <artifactId>largetest-testapp</artifactId>
+    <packaging>war</packaging>
+    <version>1.0</version>
+    <name>largetest test application</name>
+
+    <dependencies>
+        <dependency>
+            <groupId>largetest</groupId>
+            <artifactId>largetest-controllers</artifactId>
+            <version>1.0</version>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>largetest</groupId>
+            <artifactId>largetest-domain</artifactId>
+            <version>1.0</version>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>largetest</groupId>
+            <artifactId>largetest-service</artifactId>
+            <version>1.0</version>
+            <type>jar</type>
+        </dependency>
+
+
+
+
+    </dependencies>
+
+</project>

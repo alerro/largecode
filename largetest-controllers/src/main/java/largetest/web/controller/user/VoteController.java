@@ -22,17 +22,17 @@ public class VoteController {
 
 
     /**
-     * REST service /api/votetohavelunch/{restaurantId}
+     * REST service /api/restaurant/{restaurantId}/vote
      * User can vote for restaurant using this service
      * Only for registered users. User must be signed on.
-     * for example /api/votetohavelunch/3 - Current user votes for restaurant with id = 3
+     * for example /api/restaurant/3/vote - Current user votes for restaurant with id = 3
      * Curl example -
-     * curl -i -X GET  http://localhost:8080/api/votetohavelunch/3
+     * curl -i -X GET  /api/restaurant/3/vote
      *
      * @param restaurantId - id of restaurant
      * @return  JsonResponse
      */
-    @RequestMapping(value = "/api/votetohavelunch/{restaurantId}", method = RequestMethod.POST)
+    @RequestMapping(value = "/api/restaurant/{restaurantId}/vote", method = RequestMethod.POST)
     @ResponseBody
     public JsonResponse handle(@PathVariable Long restaurantId,@AuthenticationPrincipal SpringUser springUser) {
         logger.debug("I want to have lunch at restaurant {}", restaurantId);

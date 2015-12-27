@@ -6,8 +6,12 @@
 
     $(document).ready(function() {
         processJsonResponse = function(data){
-            if(data.status == 'Ok') alert('Операция успешно завершена.');
-            else alert('Код ошибки: ' + data.status + ', Описание: ' + data.errorMessage);
+            if(data.status == 'Ok') {
+                alert('Операция успешно завершена.\n' + JSON.stringify(data.data));
+
+            }else {
+                alert('Код ошибки: ' + data.status + ', Описание: ' + data.errorMessage);
+            }
         };
         processData = function(data){
             alert(JSON.stringify(data));
@@ -57,7 +61,7 @@
             thediv = $(this).closest("div");
             $.ajax({
                 type: "POST",
-                url: "/api/votetohavelunch/"+thediv.children( "input" ).val(),
+                url: "/api/restaurant/"+thediv.children( "input" ).val()+"/vote",
                 success: processJsonResponse
             });
         });
@@ -99,7 +103,7 @@
 <br/>
 <div class="/api/admin/restaurant/lunchmenu/update">
     <input type="text"  style="width: 600px;"
-           value='{"restaurantId": 3, "dateString":"23.12.2015", "menuItems" :[{"dishId":1,"price":100},{"dishId":2,"price":200},{"dishId":3,"price":300}] }'/>
+           value='{"restaurantId": 3, "date":"23.12.2015", "menuItems" :[{"dishId":1,"price":100},{"dishId":2,"price":200},{"dishId":3,"price":300}] }'/>
     <a class="jsonrequest"  href="javascript:void(0)">Обновить меню</a>
 </div>
 <br/>

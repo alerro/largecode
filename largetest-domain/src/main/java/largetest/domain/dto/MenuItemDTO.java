@@ -9,6 +9,7 @@ import java.math.BigDecimal;
  */
 public class MenuItemDTO {
     private Long dishId;
+    private String dishName;
     private BigDecimal price;
 
     public Long getDishId() {
@@ -25,5 +26,13 @@ public class MenuItemDTO {
 
     public void setPrice(BigDecimal price) {
         this.price = price;
+    }
+
+    public String getDishName() {
+        return dishName;
+    }
+
+    public void setDishName(String dishName) {
+        this.dishName = dishName;
     }
 }

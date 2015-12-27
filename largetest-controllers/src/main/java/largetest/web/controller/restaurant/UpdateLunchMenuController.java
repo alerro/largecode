@@ -27,10 +27,10 @@ public class UpdateLunchMenuController {
      *
      * Curl example -
      * curl -H "Content-Type: application/json;charset=utf-8" -X POST -d
-     * '{"restaurantId": 3, "dateString":"23.12.2015", "menuItems" :[{"dishId":1,"price":100},{"dishId":2,"price":200},{"dishId":3,"price":300}] }'
+     * '{"restaurantId": 3, "date":"23.12.2015", "menuItems" :[{"dishId":1,"price":100},{"dishId":2,"price":200},{"dishId":3,"price":300}] }'
      * http://localhost:8080/api/admin/restaurant/lunchmenu/update
      *
-     * @param dto - input data, passed as JSON, example - {"restaurantId": 3, "dateString":"23.12.2015", "menuItems" :[{"dishId":1,"price":100},{"dishId":2,"price":200},{"dishId":3,"price":300}] }
+     * @param dto - input data, passed as JSON, example - {"restaurantId": 3, "date":"23.12.2015", "menuItems" :[{"dishId":1,"price":100},{"dishId":2,"price":200},{"dishId":3,"price":300}] }
      * where 3 dishes with specified id and price will be added into menu of 23.12.2015 for restaurant with id=3
      * @return  JsonResponse
      */
