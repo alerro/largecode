@@ -89,7 +89,7 @@ JSON имеет такой вид: {"restaurantId": 3, "dateString":"23.12.2015"
 Работает для любого залогиненного пользователя. 
 
 7.Отдать голос за ресторан.   
-урл -   /api/votetohavelunch/{restaurantId}  
-метод - GET,POST  
+урл -   /api/restaurant/{restaurantId}/vote  
+метод - POST  
 Параметр id ресторана задается прямо в урле -restaurantId   
 Работает для любого залогиненного пользователя. 
